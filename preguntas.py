@@ -25,20 +25,9 @@ def pregunta_03():
 
 
 def pregunta_04():
-    """
-    Calcule el promedio de _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
-
-    Rta/
-    A    4.625000
-    B    5.142857
-    C    5.400000
-    D    3.833333
-    E    4.785714
-    Name: _c2, dtype: float64
-    """
-    return tbl0[['_c1', '_c2']].groupby(['_c1']).mean()
-
-pregunta_04()
+    respuesta = tbl0[['_c1', '_c2']].groupby(['_c1']).mean()
+    serie = respuesta.squeeze()
+    return serie
 
 def pregunta_05():
     """
