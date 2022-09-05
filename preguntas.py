@@ -91,21 +91,6 @@ def pregunta_11():
     })
 
 def pregunta_12():
-    """
-    Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
-    la columna _c5a y _c5b (unidos por ':') de la tabla `tbl2.tsv`.
-
-    Rta/
-        _c0                                  _c5
-    0     0        bbb:0,ddd:9,ggg:8,hhh:2,jjj:3
-    1     1              aaa:3,ccc:2,ddd:0,hhh:9
-    2     2              ccc:6,ddd:2,ggg:5,jjj:1
-    ...
-    37   37                    eee:0,fff:2,hhh:6
-    38   38                    eee:0,fff:9,iii:2
-    39   39                    ggg:3,hhh:8,jjj:5
-    """
-
     c5a = tbl2.groupby(['_c0'])['_c5a'].apply(list).tolist()
     c5b = tbl2.groupby(['_c0'])['_c5b'].apply(list).tolist()
     c0 = tbl1['_c0'].unique().tolist()
@@ -144,4 +129,8 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    join = pd.merge(tbl0, tbl2, on='_c0', how='inner')
+
+    respuesta = join[['_c1', '_c5b']].groupby(['_c1']).sum()
+    serie = respuesta.squeeze()
+    return serie
