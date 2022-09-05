@@ -60,11 +60,9 @@ def pregunta_08():
 
     """
     sumas = tbl0.sum(numeric_only=True, axis=1).tolist()
-    nuevoDf = tbl0
+    nuevoDf = tbl0.copy()
     nuevoDf['suma'] = sumas 
     return nuevoDf
-
-print(pregunta_08())
 
 def pregunta_09():
     """
