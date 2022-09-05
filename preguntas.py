@@ -30,21 +30,9 @@ def pregunta_04():
     return serie
 
 def pregunta_05():
-    """
-    Calcule el valor máximo de _c2 por cada letra en la columna _c1 del archivo
-    `tbl0.tsv`.
-
-    Rta/
-    _c1
-    A    9
-    B    9
-    C    9
-    D    7
-    E    9
-    Name: _c2, dtype: int64
-    """
-    return
-
+    respuesta = tbl0[['_c1', '_c2']].groupby(['_c1']).max()
+    serie = respuesta.squeeze()
+    return serie
 
 def pregunta_06():
     """
