@@ -23,7 +23,6 @@ def pregunta_02():
 def pregunta_03():
     return tbl0['_c1'].value_counts().sort_index()
 
-pregunta_03()
 
 def pregunta_04():
     """
@@ -37,8 +36,9 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+    return tbl0[['_c1', '_c2']].groupby(['_c1']).mean()
 
+pregunta_04()
 
 def pregunta_05():
     """
