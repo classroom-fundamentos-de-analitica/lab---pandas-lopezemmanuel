@@ -73,23 +73,18 @@ def pregunta_10():
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
     valores = tbl0[['_c1', '_c2']].groupby(['_c1'])['_c2'].apply(list).tolist()
-    c1 = []
+    c2 = []
 
     for letra in valores:
         texto = ''
         for valor in sorted(letra):
             texto += f'{valor}:'
         
-        c1.append(texto[:-1])
+        c2.append(texto[:-1])
 
-    nuevoDf = {
-        '_c0': ['A', 'B', 'C', 'D', 'E'],
-        '_c1': c1
-    }
-
-    return pd.DataFrame(nuevoDf)
-
-print(pregunta_10())
+    return pd.DataFrame({
+        '_c2': c2
+    }, index = pd.Series(['A', 'B', 'C', 'D', 'E'], name='_c1'))
 
 def pregunta_11():
     """
