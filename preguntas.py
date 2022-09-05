@@ -7,6 +7,7 @@ Este archivo contiene las preguntas que se van a realizar en el laboratorio.
 Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preguntas.
 
 """
+from unicodedata import numeric
 import pandas as pd
 
 tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
@@ -23,7 +24,6 @@ def pregunta_02():
 def pregunta_03():
     return tbl0['_c1'].value_counts().sort_index()
 
-
 def pregunta_04():
     respuesta = tbl0[['_c1', '_c2']].groupby(['_c1']).mean()
     serie = respuesta.squeeze()
@@ -35,32 +35,14 @@ def pregunta_05():
     return serie
 
 def pregunta_06():
-    """
-    Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
-    en mayusculas y ordenados alfabéticamente.
-
-    Rta/
-    ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-
-    """
-    return
-
+    unicos = tbl1['_c4'].unique()
+    salida = sorted(map(lambda x: x.upper(), unicos))
+    return salida
 
 def pregunta_07():
-    """
-    Calcule la suma de la _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
-
-    Rta/
-    _c1
-    A    37
-    B    36
-    C    27
-    D    23
-    E    67
-    Name: _c2, dtype: int64
-    """
-    return
-
+    respuesta = tbl0[['_c1', '_c2']].groupby(['_c1']).sum()
+    serie = respuesta.squeeze()
+    return serie
 
 def pregunta_08():
     """
@@ -77,8 +59,12 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    sumas = tbl0.sum(numeric_only=True, axis=1).tolist()
+    nuevoDf = tbl0
+    nuevoDf['suma'] = sumas 
+    return nuevoDf
 
+print(pregunta_08())
 
 def pregunta_09():
     """
