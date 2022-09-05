@@ -7,6 +7,7 @@ Este archivo contiene las preguntas que se van a realizar en el laboratorio.
 Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preguntas.
 
 """
+from posixpath import split
 from unicodedata import numeric
 import pandas as pd
 
@@ -45,20 +46,6 @@ def pregunta_07():
     return serie
 
 def pregunta_08():
-    """
-    Agregue una columna llamada `suma` con la suma de _c0 y _c2 al archivo `tbl0.tsv`.
-
-    Rta/
-        _c0 _c1  _c2         _c3  suma
-    0     0   E    1  1999-02-28     1
-    1     1   A    2  1999-10-28     3
-    2     2   B    5  1998-05-02     7
-    ...
-    37   37   C    9  1997-07-22    46
-    38   38   E    1  1999-09-28    39
-    39   39   E    5  1998-01-26    44
-
-    """
     sumas = tbl0.sum(numeric_only=True, axis=1).tolist()
     nuevoDf = tbl0.copy()
     nuevoDf['suma'] = sumas 
@@ -79,8 +66,11 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
-
+    c3 = tbl0['_c3'].tolist()
+    years = list(map(lambda x: x.split('-')[0], c3))
+    nuevoDf = tbl0.copy()
+    nuevoDf['year'] = years
+    return nuevoDf
 
 def pregunta_10():
     """
