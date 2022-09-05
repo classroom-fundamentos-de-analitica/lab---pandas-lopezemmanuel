@@ -59,19 +59,6 @@ def pregunta_09():
     return nuevoDf
 
 def pregunta_10():
-    """
-    Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
-    la columna _c2 para el archivo `tbl0.tsv`.
-
-    Rta/
-                                   _c1
-      _c0
-    0   A              1:1:2:3:6:7:8:9
-    1   B                1:3:4:5:6:8:9
-    2   C                    0:5:6:7:9
-    3   D                  1:2:3:5:5:7
-    4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
-    """
     valores = tbl0[['_c1', '_c2']].groupby(['_c1'])['_c2'].apply(list).tolist()
     c2 = []
 
@@ -102,8 +89,21 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    valores = tbl1.groupby(['_c0'])['_c4'].apply(list).tolist()
+    c0 = tbl1['_c0'].unique().tolist()
+    c4 = []
 
+    for numero in valores:
+        texto = ''
+        for valor in sorted(numero):
+            texto += f'{valor},'
+        
+        c4.append(texto[:-1])
+
+    return pd.DataFrame({
+        '_c0': c0,
+        '_c4': c4
+    })
 
 def pregunta_12():
     """
