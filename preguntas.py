@@ -74,21 +74,6 @@ def pregunta_10():
     }, index = pd.Series(['A', 'B', 'C', 'D', 'E'], name='_c1'))
 
 def pregunta_11():
-    """
-    Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
-    la columna _c4 del archivo `tbl1.tsv`.
-
-    Rta/
-        _c0      _c4
-    0     0    b,f,g
-    1     1    a,c,f
-    2     2  a,c,e,f
-    3     3      a,b
-    ...
-    37   37  a,c,e,f
-    38   38      d,e
-    39   39    a,d,f
-    """
     valores = tbl1.groupby(['_c0'])['_c4'].apply(list).tolist()
     c0 = tbl1['_c0'].unique().tolist()
     c4 = []
@@ -120,8 +105,30 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
 
+    c5a = tbl2.groupby(['_c0'])['_c5a'].apply(list).tolist()
+    c5b = tbl2.groupby(['_c0'])['_c5b'].apply(list).tolist()
+    c0 = tbl1['_c0'].unique().tolist()
+    
+    c5 = []
+
+    for i in range(len(c5a)):
+        x = []
+
+        for j in range(len(c5a[i])):
+            x.append(f'{c5a[i][j]}:{c5b[i][j]}')
+        
+        texto = ''
+
+        for valor in sorted(x):
+            texto += f'{valor},'
+
+        c5.append(texto[:-1])
+
+    return pd.DataFrame({
+        '_c0': c0,
+        '_c5': c5
+    })
 
 def pregunta_13():
     """
