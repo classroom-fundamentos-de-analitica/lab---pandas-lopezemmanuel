@@ -52,20 +52,6 @@ def pregunta_08():
     return nuevoDf
 
 def pregunta_09():
-    """
-    Agregue el año como una columna al archivo `tbl0.tsv`.
-
-    Rta/
-        _c0 _c1  _c2         _c3  year
-    0     0   E    1  1999-02-28  1999
-    1     1   A    2  1999-10-28  1999
-    2     2   B    5  1998-05-02  1998
-    ...
-    37   37   C    9  1997-07-22  1997
-    38   38   E    1  1999-09-28  1999
-    39   39   E    5  1998-01-26  1998
-
-    """
     c3 = tbl0['_c3'].tolist()
     years = list(map(lambda x: x.split('-')[0], c3))
     nuevoDf = tbl0.copy()
@@ -86,8 +72,24 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    valores = tbl0[['_c1', '_c2']].groupby(['_c1'])['_c2'].apply(list).tolist()
+    c1 = []
 
+    for letra in valores:
+        texto = ''
+        for valor in sorted(letra):
+            texto += f'{valor}:'
+        
+        c1.append(texto[:-1])
+
+    nuevoDf = {
+        '_c0': ['A', 'B', 'C', 'D', 'E'],
+        '_c1': c1
+    }
+
+    return pd.DataFrame(nuevoDf)
+
+print(pregunta_10())
 
 def pregunta_11():
     """
