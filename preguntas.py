@@ -116,19 +116,6 @@ def pregunta_12():
     })
 
 def pregunta_13():
-    """
-    Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
-    suma de tbl2._c5b por cada valor en tbl0._c1.
-
-    Rta/
-    _c1
-    A    146
-    B    134
-    C     81
-    D    112
-    E    275
-    Name: _c5b, dtype: int64
-    """
     join = pd.merge(tbl0, tbl2, on='_c0', how='inner')
 
     respuesta = join[['_c1', '_c5b']].groupby(['_c1']).sum()
